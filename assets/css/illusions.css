@@ -1,0 +1,120 @@
+/* Original illusion figures for Brain Bend Lab. No third-party images. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.illusion { position: relative; }
+.illusion .stage { position: relative; }
+.illusion svg { width: 100%; height: auto; display: block; }
+
+/* Café wall */
+.cafe {
+  width: min(100%, 22rem);
+  margin: 0 auto;
+  background: #8a8a8a;
+  padding: 6px 0;
+  line-height: 0;
+}
+.cafe-row {
+  display: flex;
+  height: 22px;
+  gap: 2px;
+  margin: 2px 0;
+  padding-inline: 0;
+}
+.cafe-row:nth-child(even) { padding-left: 18px; }
+.cafe-row i {
+  width: 34px;
+  height: 22px;
+  flex: 0 0 34px;
+  background: #111;
+  display: block;
+}
+.cafe-row i:nth-child(even) { background: #f6f6f6; }
+
+/* Peripheral drift — original pinwheels, not a copy of any published artwork */
+.drift {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: min(100%, 20rem);
+  margin: 0 auto;
+  padding: 8px;
+  background: #1a1a1a;
+}
+.drift i {
+  aspect-ratio: 1;
+  display: block;
+  border-radius: 4px;
+  background: conic-gradient(
+    #0a0a0a 0 25%,
+    #efefef 25% 50%,
+    #0a0a0a 50% 75%,
+    #efefef 75% 100%
+  );
+  animation: drift-spin 6s linear infinite;
+}
+.drift i:nth-child(4n+2),
+.drift i:nth-child(4n+3) { animation-direction: reverse; }
+.drift i:nth-child(odd) {
+  background: conic-gradient(
+    #efefef 0 25%,
+    #0a0a0a 25% 50%,
+    #efefef 50% 75%,
+    #0a0a0a 75% 100%
+  );
+}
+@keyframes drift-spin {
+  to { transform: rotate(0.001deg); } /* placeholder; motion comes from luminance, but a tiny hint helps some screens */
+}
+/* Real motion impression is from the pattern; add a slow hue-independent shimmer via filter? Better: rotate the gradient with @property if supported. */
+@supports (background: paint(x)) { }
+.drift i {
+  animation: drift-shift 8s linear infinite;
+}
+@keyframes drift-shift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(0deg); }
+}
+/* Without rotating the tiles (that would be real motion), we rely on the static Fraser–Wilcox pattern.
+   To strengthen the effect we use stepped ramps rather than spinning the element. */
+.drift i,
+.drift i:nth-child(odd) { animation: none; }
+
+.why { margin-top: 0.2rem; }
+
+.cafe-row i {
+  width: auto;
+  flex: 1 0 9%;
+  max-width: none;
+  height: 22px;
+}
+.cafe-row:nth-child(even) { padding-left: 5%; padding-right: 0; }
+.cafe-row:nth-child(odd) { padding-right: 5%; }
+
+.drift i {
+  background: conic-gradient(
+    #050505 0deg 90deg,
+    #d0d0d0 90deg 180deg,
+    #ffffff 180deg 270deg,
+    #4a4a4a 270deg 360deg
+  );
+  animation: none;
+}
+.drift i:nth-child(even) {
+  background: conic-gradient(
+    #ffffff 0deg 90deg,
+    #4a4a4a 90deg 180deg,
+    #050505 180deg 270deg,
+    #d0d0d0 270deg 360deg
+  );
+}
+.drift i:nth-child(4n+3) { transform: rotate(90deg); }
+.drift i:nth-child(4n+4) { transform: rotate(90deg); }
